@@ -1,15 +1,35 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Inverse of a matrix
+## First we will define a matriz that would be in funtion of Z.
+## After that we set the funtion with relationship to y and 
+## Define the valor of the object reverse as null.
 
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-
+makeCacheMatrix <- function(z = matrix()) {
+   reverse <- NULL
+    set <- function(z) {
+    z <<- y
+    reverse <<- NULL
+    
+    get <- function() z
+    setInverse <- function(inverse) reverse <<- inverse
+    getInverse <- function() reverse
+    list(set = set,
+         get = get,
+         setInverse = setInverse,
+         getInverse = getInverse)
+    
 }
 
+    ## The function cacheSolve will get the matix inverse
+  cacheSolve <- function(z, ...) {
 
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    reverse <- z$getInverse()
+    if (!is.null(reverse)) {
+      message("getting cached data")
+      return(reverse)
+    }
+    mat <- z$get()
+    reverse <- solve(mat, ...)
+    x$setInverse(reverse)
+    reverse
+  }
 }
